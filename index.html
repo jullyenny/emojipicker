@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <title>Emoji</title>
+    <script>
+
+        async function copiarTexto() {
+            // Get the text field
+            var copyText = document.querySelector(".text");
+
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            await window.navigator.clipboard.writeText(copyText.value);
+
+            // Alert the copied text
+            alert("Texto Copiado: " + copyText.value);
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Emoji Picker </h1>
+    <span>Copie seu Emoji </span>
+    <div class="container">
+        <textarea class="text" cols="30" rows="10"></textarea>
+    </div>
+    <button onclick="copiarTexto()"> Copiar</button>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
+    <script>
+        var input = document.querySelector('.text');
+        var picker = new EmojiButton({
+            position: 'right-start'
+        })
+
+        picker.on('emoji', function (emoji) {
+            input.value += emoji;
+        })
+
+        input.addEventListener('click', function () {
+            picker.pickerVisible ? picker.hidePicker() : picker.showPicker(input);
+        })
+    </script>
+</body>
+
+</html>
